@@ -1,0 +1,69 @@
+In Java, `var` is a feature introduced in Java 10 as part of the local variable type inference.
+It allows the compiler to infer the type of a variable based on the type of the initializer. This can make code more concise and readable. However, it can only be used for local variables (within a method, constructor, or initializer block).
+
+Here's an example:
+
+```java
+var age = 25; // The compiler infers that 'age' is of type 'int'
+var name = "John Doe"; // The compiler infers that 'name' is of type 'String'
+```
+
+### Key Points about `var`
+
+- **Local Variable Type Inference:** `var` can only be used for local variables within methods, constructors, or initializer blocks. It cannot be used for instance variables, static variables, method parameters, or return types.
+- **Readable Code:** While `var` can make code more concise, it's important to ensure that the code remains readable and the type of the variable is clear from the context.
+- **Type Safety:** The type is still determined at compile-time, so Java's strong type safety is maintained. The type of the variable cannot change once it is inferred.
+
+### Example Usage
+
+Here are some examples of using `var`:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Using var for local variables
+        var number = 10; // inferred as int
+        var message = "Hello, World!"; // inferred as String
+        var price = 19.99; // inferred as double
+
+        // Using var with an object
+        var app = new App(); // inferred as App
+
+        // Using var in a loop
+        var list = List.of("Apple", "Banana", "Cherry");
+        for (var item : list) {
+            System.out.println(item);
+        }
+    }
+}
+
+class App {
+    public void display() {
+        System.out.println("App instance");
+    }
+}
+```
+
+### Restrictions
+
+- **No `null` Initialization:** You cannot use `var` if the initializer is `null`, because the compiler cannot infer the type.
+- **No Lambda Expressions:** You cannot use `var` with lambda expressions.
+- **No Array Initializers:** You cannot use `var` with array initializers without specifying the type explicitly.
+
+### Example with Restrictions
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // var x = null; // Compile-time error
+        // var lambda = () -> System.out.println("Lambda"); // Compile-time error
+        // var numbers = {1, 2, 3}; // Compile-time error
+
+        // Correct usage
+        var numbers = new int[]{1, 2, 3}; // inferred as int[]
+        var list = List.of(1, 2, 3); // inferred as List<Integer>
+    }
+}
+```
+
+In summary, `var` in Java helps to reduce verbosity while maintaining type safety by allowing the compiler to infer the type of local variables based on their initializer.
